@@ -125,7 +125,7 @@ public class WebSocketServerPlugin extends CordovaPlugin {
 
             final List<String> origins = _origins;
             final List<String> protocols = _protocols;
-            final Boolean tcpNoDelay= _tcpNoDelay;
+            final Boolean tcpNoDelay = _tcpNoDelay;
 
             cordova.getThreadPool().execute(new Runnable() {
                 @Override
