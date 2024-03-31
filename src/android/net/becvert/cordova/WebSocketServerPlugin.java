@@ -120,12 +120,12 @@ public class WebSocketServerPlugin extends CordovaPlugin {
                 return false;
             }
             if (!args.isNull(3)) {
-                _tcpNoDelay = Boolean.valueOf(args.optBoolean(3));
+                _ = Boolean.valueOf(args.optBoolean(3));
             }
 
             final List<String> origins = _origins;
             final List<String> protocols = _protocols;
-            final Boolean tcpNoDelay = _tcpNoDelay;
+            final Boolean  = _;
 
             cordova.getThreadPool().execute(new Runnable() {
                 @Override
@@ -154,6 +154,7 @@ public class WebSocketServerPlugin extends CordovaPlugin {
 
                     if (tcpNoDelay != null) {
                         newServer.setTcpNoDelay(tcpNoDelay);
+                        newServer.setReuseAddr(true); // to reuse existing server port
                     }
 
                     try {
