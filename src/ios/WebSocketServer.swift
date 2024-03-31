@@ -116,6 +116,7 @@ import Foundation
             
             if tcpNoDelay != nil {
                 server.setTcpNoDelay(tcpNoDelay!)
+                server.setReuseAddr(true)
             }
 
             commandDelegate?.run(inBackground: {
