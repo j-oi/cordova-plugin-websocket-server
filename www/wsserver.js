@@ -1,5 +1,4 @@
 'use strict';
-var exec = require('cordova/exec');
 
 var fail = function(o) {
     console.error("Error " + JSON.stringify(o));
@@ -10,11 +9,11 @@ var connections = [];
 var WebSocketServer = {
 
     getInterfaces : function(success, failure) {
-        return exec(success, failure, "WebSocketServer", "getInterfaces", []);
+        return cordova.exec(success, failure, "WebSocketServer", "getInterfaces", []);
     },
 
     start : function(port, options, success, failure) {
-        return exec(function(result) {
+        return cordova.exec(function(result) {
             switch (result.action) {
             case 'onFailure':
                 connections = [];
@@ -74,7 +73,7 @@ var WebSocketServer = {
     },
 
     stop : function(success, failure) {
-        return exec(function(result) {
+        return cordova.exec(function(result) {
             connections = [];
             if (success) {
                 success(result.addr, result.port);
@@ -86,7 +85,7 @@ var WebSocketServer = {
         if (typeof msg == "string") {
             
             // send text frame (websocket opcode 1)
-            return exec(null, fail, "WebSocketServer", "send", [ conn.uuid, msg ]);
+            return cordova.exec(null, fail, "WebSocketServer", "send", [ conn.uuid, msg ]);
 
         } else {
             // convert any iterable object to Base64 string
@@ -99,12 +98,12 @@ var WebSocketServer = {
             var msg_base64 = window.btoa(binary_string);
 
             // send binary frame (websocket opcode 2)
-            return exec(null, fail, "WebSocketServer", "send_binary", [ conn.uuid, msg_base64 ]);
+            return cordova.exec(null, fail, "WebSocketServer", "send_binary", [ conn.uuid, msg_base64 ]);
         }
     },
 
     close : function(conn, code, reason) {
-        return exec(null, fail, "WebSocketServer", "close", [ conn.uuid, code, reason ]);
+        return cordova.exec(null, fail, "WebSocketServer", "close", [ conn.uuid, code, reason ]);
     }
 
 };
